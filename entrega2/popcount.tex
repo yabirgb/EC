@@ -1,0 +1,56 @@
+\newpage
+
+\subsection*{Popcount}
+
+\begin{flushleft}
+  Tras haber realizado mediciones de tiempo a las distintas funciones
+  programadas en el archivo \textit{popcount.c} los resultados fueron
+  los siguientes:
+\end{flushleft}
+
+\begin{table}[!htbp]
+\centering
+\caption{Popcount -O0}
+\label{my-label}
+\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|l|}\hline
+-O0        & 0    & 1    & 2    & 3    & 4    & 5    & 6    & 7    & 8    & 9    & Media \\\hline
+Popcount 1 & 8246 & 5563 & 4971 & 4764 & 4783 & 4771 & 4908 & 4795 & 4784 & 5043 & 5263  \\\hline
+Popcount 2 & 5579 & 3816 & 3470 & 3327 & 3599 & 3335 & 3334 & 3348 & 3574 & 3934 & 3732  \\\hline
+Popcount 3 & 624  & 731  & 625  & 730  & 636  & 623  & 624  & 621  & 624  & 624  & 646   \\\hline
+Popcount 4 & 1320 & 1569 & 1319 & 1320 & 1319 & 1325 & 1324 & 1396 & 1322 & 1319 & 1353  \\\hline
+Popcount 5 & 328  & 391  & 328  & 328  & 329  & 328  & 328  & 328  & 328  & 329  & 335   \\\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[!htbp]
+\centering
+\caption{Popcount -O1}
+\label{my-label}
+\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|l|}\hline
+-O1        & 0    & 1    & 2    & 3    & 4    & 5    & 6    & 7    & 8    & 9    & Media \\\hline
+Popcount 1 & 2250 & 1703 & 1607 & 1657 & 1358 & 1378 & 1355 & 1369 & 1487 & 1355 & 1552  \\\hline
+Popcount 2 & 752  & 938  & 752  & 682  & 477  & 616  & 458  & 617  & 708  & 614  & 661   \\\hline
+Popcount 3 & 626  & 631  & 624  & 539  & 527  & 772  & 536  & 528  & 573  & 528  & 588   \\\hline
+Popcount 4 & 438  & 438  & 485  & 375  & 370  & 381  & 404  & 393  & 369  & 388  & 404   \\\hline
+Popcount 5 & 136  & 136  & 1044 & 115  & 115  & 121  & 114  & 683  & 115  & 115  & 269   \\\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[!htbp]
+\centering
+\caption{Popcount -O2}
+\label{my-label}
+\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|l|}\hline
+-O2        & 0    & 1    & 2    & 3    & 4    & 5    & 6    & 7    & 8    & 9    & Media \\\hline
+Popcount 1 & 2699 & 903  & 1041 & 1223 & 906  & 1450 & 1801 & 1450 & 1450 & 1450 & 1437  \\\hline
+Popcount 2 & 1390 & 636  & 636  & 635  & 627  & 702  & 729  & 702  & 636  & 772  & 747   \\\hline
+Popcount 3 & 1397 & 529  & 525  & 521  & 576  & 584  & 575  & 577  & 575  & 577  & 644   \\\hline
+Popcount 4 & 1041 & 395  & 396  & 390  & 431  & 431  & 431  & 431  & 408  & 430  & 478   \\\hline
+Popcount 5 & 294  & 110  & 110  & 109  & 122  & 121  & 121  & 121  & 122  & 121  & 135  \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{figure}[!htbp]
+  \centering
+  \includegraphics[width=1.1\textwidth]{popcount.png}
+\end{figure}

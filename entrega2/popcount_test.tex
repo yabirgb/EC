@@ -1,0 +1,64 @@
+\section*{Cuestiones sobre popcount.c}
+
+\begin{ejercicio}{1. xoDar una respuesta precisa a la primera pregunta
+    (primer párrafo) de la Sección 4.1: en el peor caso, cuando todos
+    los elementos tienen todos los bits activados... ¿cómo de grande
+    puede ser N sin que haya overflow, si acumulamos la suma de
+    bits en un int? ¿Y s si se acumulara en un unsigned?}
+
+  El un \textit{int} podemos almacenar $2^{31}$ bits ya que uno se reserva para el signo. Así tenemos que resolver:
+  $$ 2^{31}-1 = 32*n$$
+
+  En el caso de ser unsigned resolvemos la ecuación:
+  $$ 2^{32}-1 = 32*n$$
+\end{ejercicio}
+
+\begin{ejercicio}{2. Diseñar la fórmula sugerida en el cuarto
+    párrafo. ¿Cómo se ha razonado ese cálculo?}
+
+  En la posición menos significativa de número consecutivos se alternan 0 e 1 cada vez. Así el número de 1 para un valor de $SIZE$ sería:
+
+  $$2^{SIZE-1}\cdot SIZE$$
+
+
+\end{ejercicio}
+
+\newpage
+
+\begin{ejercicio}{3. ¿Por qué necesitaremos declarar la lista de enteros
+    como unsigned? (come entado en el tercer párrafo) ¿Qué
+    problema habría si se declarara como int? ¿Notaríamos en
+    nuestro programa la diferencia?  En caso negativo... ¿qué
+    tendría que suceder para notar la diferencia?}
+
+  Lo declaramos como unsigned para que los calculos no se vean
+  afectados por el bit de signo. En caso de haber un número negativo se duplicarían bits.
+
+  En nuestro programa no notariamos la diferencia ya que todos los
+  número son positivos.
+  
+\end{ejercicio}
+
+\begin{ejercicio}{5. S Si las restriccion a registro pueden ser mucho
+    mejores que las restricciones a memoria...  ¿Por qué entonces
+    usamos sólo una restriccióón a registro en la versión 5a, y
+    las demás a memoria?}
+
+  Porque un array no lo podemos introducir en un registro ya que el
+  tamaño de estos está limitado.
+  
+\end{ejercicio}
+
+\begin{ejercicio}{7.La versión 3 probablemente producirá resultados
+    extraños, porque no sea mejor que la anterior (versión 2, incluso
+    usando restricciones a registros) y/o porque tarde lo mismo
+    independientemente del nivel de optimización. Intentar buscar
+    explicación a ambas características, comparando los códigos ASM
+    generados.}
+
+  Los tiempos entre ambas implementaciones son muy parecidos. Una
+  posible diferencia en los códigos ensamblador que influya en la
+  eficiencia es que la versión 3 realiza una comparación más que la
+  versión 2 no realiza.
+  
+\end{ejercicio}

@@ -1,0 +1,129 @@
+\section*{Preguntas de autocombración: suma\_08\_Casm}
+
+\begin{ejercicio}{1. Obtener el código de ensamblador generado con gcc
+    y compararlo con el anterior de \textit{suma\_08} ¿Qué diferencias
+    hay?}
+
+  Como principal diferencia encontramos que el código generado por ensamblador combrueba que la lista sea no vacía. También podemos destacar que en lugar de usar \textbf{inc} utiliza \textbf{addl}.
+\end{ejercicio}
+
+\begin{ejercicio}{2. Comparar el cód digo generado comentando
+    \textit{cc} y descomentando \textit{cc} de la lista clobber.  ¿Hay
+    alguna diferencia?}
+  
+  Haciendo la compilación con la orden \textit{gcc -S suma\_08\_Casm.c
+    -o suma8.s -m32 -fno-omit-frame-pointe} y usando la orden
+  \textit{diff} no hay ninguna diferencia.
+\end{ejercicio}
+
+\begin{ejercicio}{3. No necesitamos declarar ningún otro sobreescrito, pero por un motivo distinto que en el ejemplo anterior. ¿Por qué?}
+
+  No necesitamos ninguna restricción extra porque los registros están
+  puestos por gcc. Lo hacemos así ya que necesitamos acceder a los
+  valores proporcionados a la función.
+  
+\end{ejercicio}
+
+\begin{ejercicio}{4. Si res es una variable de salida ¿por qué se le ha
+    indicado restricción \textit{+r} en lugar de \textit{=r}?}
+
+  Necesitamos marcarlo con la opción de escritura ya que al usar add
+  estamos modificando su valor.
+  
+\end{ejercicio}
+
+\begin{ejercicio}{5. Explicar por qué en este caso se prefiere acabar la linea en \textit{\textbackslash n} en lugar de \textit{\textbackslash n \textbackslash t}}
+
+  Cuando usamos \textit{(\textbackslash n \textbackslash t} lo hacemos para indentar la siguiente
+  linea e indicar estructuras que dependen de otras. En este caso
+  tenemos una única linea y las instrucción siguiente no van a
+  depender de eta.
+  
+\end{ejercicio}
+
+\section*{Preguntas de autocombración: suma\_09\_Casm}
+
+\begin{ejercicio}{1. Repasar el código de ensamblador generado por gcc
+    para las tres versiones. ¿Hay alguna diferencia?}
+
+  En \textit{suma\_09} la función suma2 se corresponde con la de suma\_08
+  y la función suma3 con la de suma\_07. Sus códigos ensambladores son
+  casi identicos. 
+  
+\end{ejercicio}
+
+\begin{ejercicio}{2. En la versión 3 se ha añadido un clobber que antes
+    no estaba (ver Figura 10). ¿Acaso no sirve para nada ese clobber?
+    ¿No hay diferencias en el código en ensamblador generado?}
+
+  La diferencia más notoria es que en suma\_09 se hace \textit{pushl
+    \% ebx}. Con lo cual está salvando su contenido y por lo tanto se
+  está preocupando de salvar el contenido de cara a otras funciones
+  que puedan usar su contenido.
+  
+\end{ejercicio}
+
+\begin{ejercicio}{3. En la versión 3 se han escrito los registros
+    con dos símbolos \%, en lugar de uno (como en la Figura 10).
+    ¿Qué pasa si se escriben como antes? ¿Por qué no pasaba eso
+    antes?}
+
+  Escribimos ahora doble porcentaje porque en los clobber hemos puesto
+  \textit{ebx} y para indicarle a gcc que nos referimos al registro y
+  no al clobber ponemos el doble porcentaje.
+  
+\end{ejercicio}
+
+\begin{ejercicio}{4. ¿Cuántos elementos tiene el array? ¿Cuánta memoria
+    ocupa? ¿Cuánto vale la suma? ¿Cómo se llaman ese tipo de sumas?
+    ¿Qué fórmula se usa para calcular una suma como esa?}
+
+  Como estamos desplazando un \textit{1} 16 posiciones a la izquiera
+  el tamaño del array será de $2^{16}$. Como lo estamos definiendo
+  como un array de \textit{int} y suponiendo que este tipo de dato usa
+  $4B$ el tamaño del array será $4*2^{16} = 2^{18}$. El valor de la suma es 2147516416 y se calcula sabiendo que se trata de una progresión aritmética:
+
+  $$\sum_{i=0}^{2^{16}}i = \frac{n(a_1 + a_n)}{2}$$
+
+  donde $n$ es el número total de términos, $a_1$ es el primer término
+  de la sucesión y $a_n$ es el último término.
+  
+\end{ejercicio}
+
+\begin{ejercicio}{5. El código C imprime un mensaje diciendo
+    $\frac{N\cdot (N+1)}{2}$, pero luego calcula $\frac{(SIZE-1)\cdot
+      SIZE}{2}$. ¿Cuál es la fórmula correcta?}
+
+  Ambas son correctas porque en el caso de que este lleno $SIZE = N+1$
+  y usando la igualdad del ejercicio anterior ambas formulas son
+  iguales.
+  
+\end{ejercicio}
+
+\newpage
+
+\begin{ejercicio}{6. Esa línea viene comentada con /* OF */. ¿Qué
+    puede significar ese comentario?  ¿Qué se puede decir acerca
+    de la forma de escribir esa fórrmula? Si es por ``incomodida
+    para calcular la fórmula'', ¿qué se podría haber hecho para evitar
+    de golpe cualquier incomodidad? ¿Cómo se escribiría
+    entonces, más cómodamente, la fórmula, y tooda la instrucción
+    printf?}
+
+  Puede significar que se produzca un overflow ya que estamos
+  calculando un número que es del orden de $2^{32}$. Para solucionar
+  esto podemos usar tipos de datos que permitan almacenar un mayor
+  tamaño. Podríamos haber escrito la orden printf como:\\
+
+  \textit{printf("\%lu \textbackslash n", SIZE*(SIZE-1)/2)}
+  
+\end{ejercicio}
+
+\begin{ejercicio}{8. ¿Hay alguna manera de ganar a gcc haciendo el
+    tipo de cosas que venimos haciendo con suma?}
+
+  Por lo general no, aunque usando asm podemos obtener mejor
+  rendimiento en algunos casos o cuando trabajamos con sistemas
+  especiales que cuenten con un repertorio de instrucciones que el
+  compilador no sepa manejar o no de manera optima.
+\end{ejercicio}
